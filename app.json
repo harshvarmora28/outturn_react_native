@@ -1,3 +1,33 @@
 {
-  "name": "CryptoWalletApp"
+  "expo": {
+    "name": "Outturn",
+    "slug": "Outturn",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/outturn_logo.jpg",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.harshcreations.outturn",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }
