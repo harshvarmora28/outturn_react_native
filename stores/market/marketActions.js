@@ -34,7 +34,7 @@ export function getHoldings(holdings = [], currency = "inr", orderBy = "market_c
                 Accept: "application/json"
             }
         }).then((response) => {
-            if(response.state == 200){
+            if(response.status == 200){
                 // Massage data
                 let myHoldings = response.data.map((item) => {
                     // Retrieve our current holdings (current quantity)
@@ -100,7 +100,7 @@ export function getCoinMarket(currency = "inr", orderBy = "market_cap_desc", spa
                 Accept: "application/json",
             }
         }).then((response) => {
-            if(response.state == 200){
+            if(response.status == 200){
                 dispatch(getCoinMarketSuccess(response.data))
             }
             else{

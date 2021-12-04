@@ -6,7 +6,8 @@ import { getHoldings, getCoinMarket } from "../stores/market/marketActions";
 // import { holdings } from "../constants/dummy";
 import { useFocusEffect } from "@react-navigation/native";
 import { SIZES, COLORS, FONTS, dummyData, icons} from "../constants";
-import { BalanceInfo } from "../components";
+import { BalanceInfo, IconTextButton } from "../components";
+import { Chart } from "../components";
 
 const Home = ({ getHoldings, getCoinMarket, myHoldings, coins }) => {
 
@@ -16,6 +17,12 @@ const Home = ({ getHoldings, getCoinMarket, myHoldings, coins }) => {
       getCoinMarket()
     }, [])
   )
+
+  let totalWallet = myHoldings.reduce((a, b) => a + (b.total || 0), 0)
+  
+  let valueChange = myHoldings.reduce((a, b) => a + (b.holding_value_change_7d || 0), 0)
+
+  let percChange = valueChange / (totalWallet - valueChange) * 100
 
     function renderWalletInfoSection() {
       return (
@@ -30,14 +37,42 @@ const Home = ({ getHoldings, getCoinMarket, myHoldings, coins }) => {
           {/* Balance Info */}
           <BalanceInfo
           title="Your Wallet"
-          displayAmount="68,000"
-          changePct="3.46"
+          displayAmount={totalWallet}
+          changePct={percChange}
           containerStyle={{
             marginTop: 50
           }}
           />
 
           {/* Buttons */}
+          <View
+          style={{
+            flexDirection: "row",
+            marginTop: 30,
+            marginBottom: -15,
+            paddingHorizontal: SIZES.radius
+          }}
+          >
+            <IconTextButton
+            label="Transfer"
+            icon={icons.send}
+            containerStyle={{
+              flex: 1, 
+              height: 40,
+              marginRight: SIZES.radius
+            }}
+            onPress={() => console.log("Tranfer")}
+            />
+            <IconTextButton
+            label="Withdraw"
+            icon={icons.withdraw}
+            containerStyle={{
+              flex: 1, 
+              height: 40
+            }}
+            onPress={() => console.log("Withdraw")}
+            />
+          </View>
         </View>
       )
     }
@@ -54,6 +89,12 @@ const Home = ({ getHoldings, getCoinMarket, myHoldings, coins }) => {
         {renderWalletInfoSection()}
 
         {/* Chart */}
+        <Chart
+          containerStyle={{
+            marginTop: SIZES.padding * 2
+          }}
+          chartPrices={coins[0]?.sparkline_in_7d?.price}
+        />
 
         {/* Top Cryptocurrency */}
       </View>
