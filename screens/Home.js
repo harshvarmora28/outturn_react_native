@@ -6,7 +6,7 @@ import { getHoldings, getCoinMarket } from "../stores/market/marketActions";
 // import { holdings } from "../constants/dummy";
 import { useFocusEffect } from "@react-navigation/native";
 import { SIZES, COLORS, FONTS, dummyData, icons} from "../constants";
-
+import { BalanceInfo } from "../components";
 
 const Home = ({ getHoldings, getCoinMarket, myHoldings, coins }) => {
 
@@ -17,10 +17,45 @@ const Home = ({ getHoldings, getCoinMarket, myHoldings, coins }) => {
     }, [])
   )
 
+    function renderWalletInfoSection() {
+      return (
+        <View
+        style={{
+          paddingHorizontal: SIZES.padding,
+          borderBottomLeftRadius: 25,
+          borderBottomRightRadius: 25, 
+          backgroundColor: COLORS.gray
+        }}
+        >
+          {/* Balance Info */}
+          <BalanceInfo
+          title="Your Wallet"
+          displayAmount="68,000"
+          changePct="3.46"
+          containerStyle={{
+            marginTop: 50
+          }}
+          />
+
+          {/* Buttons */}
+        </View>
+      )
+    }
+
   return (
     <MainLayout>
-      <View>
-        <Text>Home</Text>
+      <View
+      style={{
+        flex: 1,
+        backgroundColor: COLORS.black
+      }}
+      >
+        {/* Header - Wallet Info */}
+        {renderWalletInfoSection()}
+
+        {/* Chart */}
+
+        {/* Top Cryptocurrency */}
       </View>
     </MainLayout>
   );
