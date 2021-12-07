@@ -32,7 +32,7 @@ const Chart = ({ containerStyle, chartPrices }) => {
             return "";
         }
 
-        return `₹${Number(value).toFixed(2)}`
+        return `₹${(Number(value) * 75).toFixed(2)}` // Converting usd to inr with the help of multiplying 75 to the value
     }
 
     const formatDateTime = value => {
@@ -51,17 +51,19 @@ const Chart = ({ containerStyle, chartPrices }) => {
     }
 
     const formatNumber = (value, roundingPoint) => {
+        value = value * 75;  // Converting usd to inr
+
         if(value > 1e9){
-            return `${(value / 1e9).toFixed(roundingPoint)}B`
+            return `₹ ${(value / 1e9).toFixed(roundingPoint)}B`
         }
         else if(value > 1e6){
-            return `${(value / 1e6).toFixed(roundingPoint)}M`
+            return `₹ ${(value / 1e6).toFixed(roundingPoint)}M`
         }
         else if(value > 1e3){
-            return `${(value / 1e3).toFixed(roundingPoint)}K`
+            return `₹ ${(value / 1e3).toFixed(roundingPoint)}K`
         }
         else{
-            return value.toFixed(roundingPoint)
+            return `₹ ${value.toFixed(roundingPoint)}`
         }
     }
 
@@ -103,6 +105,7 @@ const Chart = ({ containerStyle, chartPrices }) => {
                 left: SIZES.padding,
                 top: 0,
                 bottom: 0,
+                left: 16,
                 justifyContent: "space-between"
             }}
             >

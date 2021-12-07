@@ -15,7 +15,7 @@ const TabBarCustomButton = ({ children, onPress }) => {
       style={{
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "center"
       }}
       onPress={onPress}
     >
